@@ -102,25 +102,19 @@ public class MyTool {
 			tieBa.setFid(fid);
 				for(Element t : et){
 					if(t.attr("class").equals("threadlist_abs threadlist_abs_onlyline")){
-						System.out.println("内容："+t.ownText());
-						tieBa.setContent(t.ownText());
-					}
-
-					if(t.attr("class").equals("threadlist_rep_num j_rp_num")){
-						System.out.println("回复数："+t.attr("title"));
-						tieBa.setReply(t.attr("title"));
-					}
-						
-					if(t.attr("title").equals("主题作者")){
-						Elements  Eauthor = t.getElementsByTag("a");
-						for(Element author_1 : Eauthor){
-							if(author_1.attr("target").equals("_blank")){
-								System.out.println("主题作者："+author_1.ownText());
-								tieBa.setAuthor(author_1.ownText());
-							}
+						if(!t.ownText().trim().equals("")){
+							System.out.println("内容："+t.ownText());
+							tieBa.setContent(t.ownText());
 						}
 						
 					}
+
+					if(t.attr("class").equals("threadlist_rep_num")){
+						System.out.println("回复数："+t.ownText());
+						tieBa.setReply(t.ownText());
+					}
+						
+					
 						
 				}
 				for(Element t : et2){
@@ -129,12 +123,23 @@ public class MyTool {
 						tieBa.setTime(t.ownText());
 					}
 						
-					if(t.attr("title").equals("最后回复人")){
+					if(t.attr("class").equals("tb_icon_author_rely j_replyer")){
 						Elements  reportPr= t.getElementsByTag("a");
 						for(Element r : reportPr){
 							if(r.attr("target").equals("_blank")){
 								System.out.println("最后回复人："+r.ownText());
 								tieBa.setLastReply(r.ownText());
+							}
+						}
+						
+					}
+					
+					if(t.attr("class").equals("tb_icon_author")){
+						Elements  Eauthor = t.getElementsByTag("a");
+						for(Element author_1 : Eauthor){
+							if(author_1.attr("target").equals("_blank")){
+								System.out.println("主题作者："+author_1.ownText());
+								tieBa.setAuthor(author_1.ownText());
 							}
 						}
 						
